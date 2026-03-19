@@ -1,38 +1,29 @@
-# 1. Base Image
-FROM python:3.11-slim
+# 1. Use the standard Python image (not slim) 
+# The non-slim version is larger but comes PRE-INSTALLED with 
+# build-essential and git. This bypasses the apt-get error.
+FROM python:3.11
 
-# 2. System Dependencies for standard data science libraries
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    curl \
-    software-properties-common \
-    git \
-    && rm -rf /var/lib/apt/lists/*
-
-# 3. Work Directory
+# 2. Set Work Directory
 WORKDIR /app
 
-# 4. Install Dependencies (Using Cache)
-# Copying requirements alone first speeds up re-builds if you change code later
+# 3. Install Dependencies
+# We include setuptools here just to be safe for vis-timeline
 COPY requirements.txt .
+RUN pip install --no-cache-dir setuptools
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 5. Copy Project Files
-# This copies your UI/ folder and all your .csv/.parquet files
+# 4. Copy Project Files
 COPY . .
 
-# 6. Environment Variables
-# This ensures Python can see your 'UI' folder as a package
+# 5. Environment Variables
 ENV PYTHONPATH=/app
 ENV STREAMLIT_SERVER_PORT=8501
 ENV STREAMLIT_SERVER_HEADLESS=true
 
-# 7. Port Expose
+# 6. Port Expose
 EXPOSE 8501
 
-# 8. Optimized Start Command
-# --server.address=0.0.0.0 is MANDATORY for Docker
-# --server.enableCORS=false prevents "Cross-Origin" errors on Render/AWS
+# 7. Start Command
 CMD ["streamlit", "run", "UI/main.py", \
      "--server.port=8501", \
      "--server.address=0.0.0.0", \
