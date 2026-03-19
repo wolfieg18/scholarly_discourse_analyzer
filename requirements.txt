@@ -1,5 +1,5 @@
 setuptools==75.0.0
-streamlit-vis-timeline
+streamlit-timeline
 streamlit
 numpy
 pandas
