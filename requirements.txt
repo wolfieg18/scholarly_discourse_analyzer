@@ -3,3 +3,4 @@ streamlit-vis-timeline
 streamlit
 numpy
 pandas
+pyarrow
