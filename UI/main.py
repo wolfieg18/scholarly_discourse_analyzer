@@ -103,10 +103,14 @@ with tab_home:
     st.info("Tip: Use Ctrl + Scroll in the timeline to zoom.")
 
 # --- TIMELINE TAB ---
+# --- TIMELINE TAB ---
 with tab_timeline:
     st.title("Scholarly Timeline by Era")
-    # Groups parameter removed as it's unsupported in this version
-    selected = st_timeline(items, options=options, height=550)
+    
+    # NOTE: This version of the library ONLY accepts (items, height)
+    # Any extra arguments like 'options' or 'groups' will cause a TypeError
+    selected = st_timeline(items, height=550)
+    
     st.caption("Tip: Hold Ctrl + Scroll to zoom. Drag to navigate years.")
 
 with tab_visuals:
