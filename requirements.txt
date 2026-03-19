@@ -1,5 +1,4 @@
 streamlit-vis-timeline
-streamlit
 numpy
 setuptools
 pandas
