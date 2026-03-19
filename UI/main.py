@@ -18,8 +18,8 @@ st.markdown("""
 # 2. Load Data
 try:
     # Adjust path if needed, assuming run from root
-    data_path = os.path.join("UI", "static", "all_sentiment_analysis.parquet")
-    df = pd.read_parquet(data_path)
+    data_path = os.path.join("UI", "static", "all_sentiment_analysis.csv")
+    df = pd.read_csv(data_path)
 except FileNotFoundError:
     st.error(f"Data file not found at {data_path}. Ensure it's pushed to GitHub.")
     st.stop()
