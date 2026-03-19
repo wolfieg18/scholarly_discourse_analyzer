@@ -1,5 +1,5 @@
-import setuptools
-import pkg_resources
+from setuptools import extentions
+import setuptools.extern.packaging # This often forces the namespace to load
 import streamlit as st
 from streamlit_timeline import st_timeline
 import pandas as pd
