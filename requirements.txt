@@ -1,6 +1,5 @@
-setuptools>=70.0.0
-pip
-streamlit
+setuptools==75.0.0
 streamlit-vis-timeline
+streamlit
 numpy
 pandas
